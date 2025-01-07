@@ -3,102 +3,44 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iot_project/main.dart';
 
-class Menu extends State<SmartHome>{
-  String saveText = "";
-  String saveTextonButtonClicked = "";
+import '../db/Database.dart';
+import 'Homepage.dart';
+import 'HomepageWrapper.dart';
 
-  late DatabaseReference db;
+class Menu extends State<SmartHome> {
+  Menu(SmartHome smartHome);
 
-  @override
-  void initState(){
-    super.initState();
-
-    db = FirebaseDatabase.instance.ref().child("data");
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-          children: [
-            Container(
-              child: TextField(
-                onChanged: (text){
-                  setState(() {
-                    saveText = text;
-                  });
-                },
-              ),
+    Database db = Database();
+    void onPressed() async {
+      showDialog(
+        context: context,
+        barrierDismissible: false, // Prevent closing the dialog manually
+        builder: (context) => Center(
+          child: CircularProgressIndicator(), // Your loading indicator
+        ),
+      );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomepageWrapper(
+              username: db.username,
+              smartDevices: db.smartDevices,
+              db: db,
             ),
-            Container(
-              child: TextButton(
-                onPressed: () {
-                  setState(() {
-                    saveTextonButtonClicked = saveText;
-                  });
-                },
-                child: Text('Sumbit'),
-                style: TextButton.styleFrom(
-                  textStyle: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              child: Text(saveText),
-            ),
-            Container(
-              margin: EdgeInsets.all(50),
-              child: Text(saveTextonButtonClicked),
-            ),
-            Container(
-              child: TextButton(
-                onPressed: () {
-                  setState(() {
-                    Map<String, String> data = {
-                      'value': saveText,
-                      'valueSaved': saveTextonButtonClicked
-                    };
-                    db.push().set(data);
-                  });
-                },
-                child: Text('Save on Database'),
-                style: TextButton.styleFrom(
-                  textStyle: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              child: TextButton(
-                onPressed: () {
-                  setState(() {
+          ),
+        );
+    }
 
-                  });
-                },
-                child: Text('Get data from Database'),
-                style: TextButton.styleFrom(
-                  textStyle: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold
-                  ),
-                ),
-              ),
-            ),
-            StreamBuilder(stream: db.onValue,builder: (context,snapshot){
-              if(snapshot.hasData){
-                Map data = snapshot.data?.snapshot.value as Map;
-                print(data.values.toList().last);
-                return Text("");
-              }
-              return const Text("No Data");
-            })
-          ]
-      ),
-    );
+    return SafeArea(child: Scaffold(
+        body: Container(
+          child: ElevatedButton(
+              onPressed: onPressed,
+              child: Text('Go to Second Widget')
+          ),
+        )
+    ));
   }
 }

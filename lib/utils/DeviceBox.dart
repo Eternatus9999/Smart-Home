@@ -6,8 +6,10 @@ class DeviceBox extends StatelessWidget{
   final String name;
   final String iconpath;
   final bool power;
+  final int backgroundColor;
+  final bool fontColor;
   final onchange;
-  const DeviceBox({super.key,required this.name,required this.iconpath, required this.power, required this.onchange});
+  const DeviceBox({super.key,required this.name,required this.iconpath, required this.power,required this.backgroundColor, required this.fontColor, required this.onchange});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class DeviceBox extends StatelessWidget{
       child: Container(
         decoration:
         BoxDecoration(
-            color: Colors.grey[200],
+            color: Colors.grey[backgroundColor],
             borderRadius: BorderRadius.circular(24),
         ),
         child: Column(
@@ -24,6 +26,7 @@ class DeviceBox extends StatelessWidget{
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Image.asset(iconpath,
+              color: fontColor==true?Colors.white:Colors.black,
               height: 65,),
             ),
             Padding(
@@ -31,8 +34,9 @@ class DeviceBox extends StatelessWidget{
               child: Text(
                 name,
                 style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold
+                  color: fontColor==true?Colors.white:Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
                 ),
               ),
             ),
@@ -40,7 +44,7 @@ class DeviceBox extends StatelessWidget{
               padding: const EdgeInsets.all(8.0),
               child: CupertinoSwitch(value: power, onChanged: onchange),
             )
-          ], 
+          ],
         ),
       ),
     );

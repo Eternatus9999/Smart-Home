@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -32,8 +31,8 @@ class SmartHome extends StatefulWidget {
   const SmartHome({super.key});
 
   @override
-  State<SmartHome> createState() => Homepage();
-  // State<SmartHome> createState() => Menu();
+  // State createState() => Homepage("Chathusha", [["Lights", "lib/icons/lamp.png", false, 200], ["Fans", "lib/icons/fan.png", false, 200], ["A/C", "lib/icons/air-conditioner.png", false, 200], ["TV", "lib/icons/monitor.png", false, 200]]);
+  State<SmartHome> createState() => Menu(this);
 }
 
 
