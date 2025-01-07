@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1075984251330",
+    "project_id": "smart-home-icet-project",
+    "storage_bucket": "smart-home-icet-project.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075984251330:android:2ae71d27fc953442d47e5b",
+        "android_client_info": {
+          "package_name": "edu.icet.iot_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVdYiQsBmU6MWgELPFtnHu2zFZEPhU2jQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

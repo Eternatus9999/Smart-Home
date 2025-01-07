@@ -1,0 +1,25 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "smart-home-icet-project",
+          "appId": "1:1075984251330:android:2ae71d27fc953442d47e5b",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "smart-home-icet-project",
+          "configurations": {
+            "android": "1:1075984251330:android:2ae71d27fc953442d47e5b",
+            "ios": "1:1075984251330:ios:e30ef2512b4004a0d47e5b",
+            "macos": "1:1075984251330:ios:e30ef2512b4004a0d47e5b",
+            "web": "1:1075984251330:web:d7118ade70f96d11d47e5b",
+            "windows": "1:1075984251330:web:3e35e927949718a4d47e5b"
+          }
+        }
+      }
+    }
+  }
+}
