@@ -24,11 +24,13 @@ class Database {
     });
   }
 
-  bool loadData() {
-    if(username != "Chathusha"){
-      return true;
-    }
-    return false;
+  void loadData() {
+    smartDevices = [
+      ["Lights", "lib/icons/lamp.png", false, 200],
+      ["Fans", "lib/icons/fan.png", false, 200],
+      ["A/C", "lib/icons/air-conditioner.png", false, 200],
+      ["TV", "lib/icons/monitor.png", false, 200]
+    ];
   }
   void saveData(){
     Map data = {

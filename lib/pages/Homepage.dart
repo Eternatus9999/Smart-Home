@@ -5,8 +5,6 @@ import 'package:iot_project/pages/MenuWrapper.dart';
 import 'package:iot_project/utils/DeviceBox.dart';
 
 import '../db/Database.dart';
-import '../main.dart';
-import 'Menu.dart';
 
 class Homepage extends State{
 
@@ -65,7 +63,7 @@ class Homepage extends State{
                 child:
                 GridView.builder(
                   itemCount: smartDevices.length,
-                  padding:  EdgeInsets.all(25),
+                  padding:  EdgeInsets.only(top: 25, left: 25, right: 25),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 1/1.3),
                   itemBuilder: (context, index){
                     return DeviceBox(
@@ -78,21 +76,24 @@ class Homepage extends State{
                           setState(() {
                             smartDevices[index][2] = value;
                             smartDevices[index][3]==200?smartDevices[index][3]=900:smartDevices[index][3]=200;
-                            // Map data = {
-                            //   "Owner" : username,
-                            //   "Devices": smartDevices
-                            // };
-                            // db.push().set(data);
                           });
                         },
                     );
                   },
             )),
-            Center(
-              child: ElevatedButton(onPressed: (){
-                db.saveData();
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MenuWrapper()));
-              }, child: Text("Log Out")),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 40),
+              child: Container(
+                child: ElevatedButton(onPressed: (){
+                  db.username = username;
+                  db.smartDevices = smartDevices;
+                  db.saveData();
+                  db = Database();
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MenuWrapper()));
+                },
+                  child: Text("Log Out",style: TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold)),style: TextButton.styleFrom(backgroundColor: Colors.grey[500]),
+                ),
+              ),
             )
           ],
         ),

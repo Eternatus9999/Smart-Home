@@ -1,19 +1,33 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:iot_project/main.dart';
 
 import '../db/Database.dart';
-import 'Homepage.dart';
 import 'HomepageWrapper.dart';
 
 class Menu extends State {
 
+  Database db = Database();
+  Menu(){
+    this.db = Database();
+  }
 
   @override
   Widget build(BuildContext context) {
     String name = "";
-    Database db = Database();
+    void onPressedRegister(){
+      db.username = name;
+      db.loadData();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomepageWrapper(
+            username: name,
+            smartDevices: db.smartDevices,
+            db: db,
+          ),
+        ),
+      );
+    }
     void onPressed() async {
       if(db.username == name){
         showDialog(
@@ -35,8 +49,7 @@ class Menu extends State {
         );
       }
       else {
-        // Handle failure to load data
-        Navigator.of(context).pop(); // Close the loading indicator
+        Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Wrong Username')),
         );
@@ -45,6 +58,7 @@ class Menu extends State {
     return SafeArea(
         child: Scaffold(
         body:  Column(
+          mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 40),
@@ -63,7 +77,6 @@ class Menu extends State {
                   },
                 ),
               ),
-
               ElevatedButton(
                   onPressed: onPressed,
                   style: TextButton.styleFrom(
@@ -72,7 +85,20 @@ class Menu extends State {
                       borderRadius: BorderRadius.circular(30.0),
                     ),
                   ),
-                  child: Text('Login',style: TextStyle(fontSize: 30,color: Colors.black),)
+                  child: Text('Login',style: TextStyle(fontSize: 30,color: Colors.black,fontWeight: FontWeight.bold),)
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 30.0),
+                child: ElevatedButton(
+                    onPressed: onPressedRegister,
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.grey[500],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                    ),
+                    child: Text('Register',style: TextStyle(fontSize: 30,color: Colors.black,fontWeight: FontWeight.bold),)
+                ),
               ),
             ]
           ),
