@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iot_project/db/Database.dart';
-import 'package:iot_project/main.dart';
 import 'package:iot_project/pages/Homepage.dart'; // Make sure to import Homepage
 
 class HomepageWrapper extends StatefulWidget {

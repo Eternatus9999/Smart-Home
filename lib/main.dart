@@ -32,7 +32,7 @@ class SmartHome extends StatefulWidget {
 
   @override
   // State createState() => Homepage("Chathusha", [["Lights", "lib/icons/lamp.png", false, 200], ["Fans", "lib/icons/fan.png", false, 200], ["A/C", "lib/icons/air-conditioner.png", false, 200], ["TV", "lib/icons/monitor.png", false, 200]]);
-  State<SmartHome> createState() => Menu(this);
+  State createState() => Menu();
 }
 
 

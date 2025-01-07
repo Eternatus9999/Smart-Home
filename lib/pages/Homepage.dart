@@ -1,10 +1,12 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iot_project/pages/MenuWrapper.dart';
 import 'package:iot_project/utils/DeviceBox.dart';
 
 import '../db/Database.dart';
 import '../main.dart';
+import 'Menu.dart';
 
 class Homepage extends State{
 
@@ -86,10 +88,12 @@ class Homepage extends State{
                     );
                   },
             )),
-            ElevatedButton(onPressed: (){
-              db.saveData();
-              Navigator.of(context).pop();
-            }, child: Text("Log Out"))
+            Center(
+              child: ElevatedButton(onPressed: (){
+                db.saveData();
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MenuWrapper()));
+              }, child: Text("Log Out")),
+            )
           ],
         ),
       ),
