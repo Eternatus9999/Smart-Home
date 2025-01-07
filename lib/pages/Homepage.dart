@@ -44,7 +44,8 @@ class Homepage extends State<SmartHome>{
             const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
-              child: Text("Smart Devices"),
+              child: Text("Smart Devices",
+              style: TextStyle(fontSize: 20),),
             ),
             Expanded(
                 child:
@@ -57,6 +58,11 @@ class Homepage extends State<SmartHome>{
                         name: smartDivices[index][0],
                         iconpath: smartDivices[index][1],
                         power: smartDivices[index][2],
+                        onchange: (value){
+                          setState(() {
+                            smartDivices[index][2] = value;
+                          });
+                        },
                     );
                   },
             ))
